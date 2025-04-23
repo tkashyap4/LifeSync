@@ -2,11 +2,887 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeSync - Connecting Organ Donors and Recipients</title>
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2ecc71;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --accent: #e74c3c;
+            --gray: #95a5a6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        .heart-icon {
+            color: var(--accent);
+            margin-right: 8px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn.secondary {
+            background-color: var(--secondary);
+        }
+        
+        .btn.outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn.outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .hero-content {
+            width: 50%;
+        }
+        
+        .hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .hero-content p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: var(--gray);
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .hero-image {
+            width: 45%;
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .cards {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            transition: transform 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .card-icon {
+            font-size: 48px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .card p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .stats {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+        }
+        
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        .stat {
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .stat-text {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .process {
+            background-color: white;
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        
+        .step {
+            text-align: center;
+            width: 23%;
+            position: relative;
+        }
+        
+        .step:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            top: 40px;
+            right: -15%;
+            width: 30%;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary);
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+        }
+        
+        .step h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .step p {
+            color: var(--gray);
+        }
+        
+        .testimonials {
+            background-color: var(--light);
+        }
+        
+        .testimonial {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+        
+        .author-info h4 {
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+        
+        .author-role {
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        .registration {
+            background-color: white;
+        }
+        
+        .registration-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .tab-button {
+            padding: 15px 30px;
+            background-color: var(--light);
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .tab-button:first-child {
+            border-radius: 5px 0 0 5px;
+        }
+        
+        .tab-button:last-child {
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .tab-button.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .checkbox-group {
+            margin-top: 10px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .checkbox-item input {
+            margin-right: 8px;
+        }
+        
+        .medical-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+        
+        .form-submit {
+            margin-top: 30px;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column {
+            width: 22%;
+        }
+        
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bdc3c7;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
-    <h1>LifeSync</h1>
-    
-</body>
-</html>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="heart-icon">❤️</i> Life<span>Sync</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#about">About Us</a>
+                    <a href="#faq">FAQ</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div>
+                    <a href="#register" class="btn">Register Now</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Saving Lives Through Organ Donation</h1>
+                <p>LifeSync bridges the gap between organ donors and recipients, making the process seamless, transparent, and life-changing.</p>
+                <div class="hero-buttons">
+                    <a href="#donor-registration" class="btn">Become a Donor</a>
+                    <a href="#recipient-registration" class="btn secondary">Register as Recipient</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="/api/placeholder/600/400" alt="Organ donation illustration">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose LifeSync?</h2>
+                <p>Our platform offers unique features designed to make organ donation accessible, efficient, and impactful.</p>
+            </div>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-icon">🔒</div>
+                    <h3>Secure Registration</h3>
+                    <p>Your personal and medical information is protected with state-of-the-art security protocols.</p>
+                    <a href="#learn-more" class="btn outline">Learn More</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🔍</div>
+                    <h3>Smart Matching</h3>
+                    <p>Our advanced algorithm finds the most compatible donor-recipient matches quickly and efficiently.</p>
+                    <a href="#learn-more" class="btn outline">Learn More</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📱</div>
+                    <h3>Real-time Updates</h3>
+                    <p>Stay informed about your status with notifications and updates throughout the process.</p>
+                    <a href="#learn-more" class="btn outline">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="section stats">
+        <div class="container">
+            <div class="stats-container">
+                <div class="stat">
+                    <div class="stat-number">10,000+</div>
+                    <div class="stat-text">Registered Donors</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">5,000+</div>
+                    <div class="stat-text">Successful Matches</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-text">Satisfaction Rate</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-text">Support Available</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="how-it-works" class="section process">
+        <div class="container">
+            <div class="section-title">
+                <h2>How It Works</h2>
+                <p>Our streamlined process makes organ donation and receiving simple and transparent.</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Register</h3>
+                    <p>Complete our comprehensive registration process as either a donor or recipient.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Medical Review</h3>
+                    <p>Our medical team reviews your information for compatibility and eligibility.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Matching</h3>
+                    <p>Our system finds potential matches based on medical compatibility and urgency.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Coordination</h3>
+                    <p>We coordinate with healthcare providers to facilitate the donation process.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Success Stories</h2>
+                <p>Hear from those whose lives have been changed through LifeSync.</p>
+            </div>
+            <div class="cards">
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        "Thanks to LifeSync, I was able to donate my kidney and save someone's life. The process was seamless, and the support was exceptional throughout my journey."
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="/api/placeholder/100/100" alt="John's profile picture">
+                        <div class="author-info">
+                            <h4>John D.</h4>
+                            <div class="author-role">Kidney Donor</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        "After waiting for years on traditional waiting lists, LifeSync matched me with a compatible donor in just months. I'm forever grateful for this second chance at life."
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="/api/placeholder/100/100" alt="Sarah's profile picture">
+                        <div class="author-info">
+                            <h4>Sarah M.</h4>
+                            <div class="author-role">Heart Recipient</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section id="register" class="section registration">
+        <div class="container">
+            <div class="section-title">
+                <h2>Register with LifeSync</h2>
+                <p>Whether you want to donate organs or are in need of a transplant, start your journey here.</p>
+            </div>
+            
+            <div class="registration-tabs">
+                <button class="tab-button active" data-tab="donor">Donor Registration</button>
+                <button class="tab-button" data-tab="recipient">Recipient Registration</button>
+            </div>
+            
+            <!-- Donor Registration Form -->
+            <div id="donor-registration" class="tab-content active">
+                <form>
+                    <h3>Personal Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="donor-first-name">First Name</label>
+                            <input type="text" id="donor-first-name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="donor-last-name">Last Name</label>
+                            <input type="text" id="donor-last-name" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="donor-email">Email Address</label>
+                            <input type="email" id="donor-email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="donor-phone">Phone Number</label>
+                            <input type="tel" id="donor-phone" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="donor-dob">Date of Birth</label>
+                            <input type="date" id="donor-dob" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="donor-gender">Gender</label>
+                            <select id="donor-gender" class="form-control" required>
+                                <option value="">Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                                <option value="prefer-not-to-say">Prefer not to say</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="donor-address">Address</label>
+                        <input type="text" id="donor-address" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="donor-city">City</label>
+                            <input type="text" id="donor-city" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="donor-state">State/Province</label>
+                            <input type="text" id="donor-state" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="donor-zip">Zip/Postal Code</label>
+                            <input type="text" id="donor-zip" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="medical-section">
+                        <h3>Medical Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="donor-blood-type">Blood Type</label>
+                                <select id="donor-blood-type" class="form-control" required>
+                                    <option value="">Select Blood Type</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                    <option value="unknown">Unknown</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="donor-height">Height (cm)</label>
+                                <input type="number" id="donor-height" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="donor-weight">Weight (kg)</label>
+                                <input type="number" id="donor-weight" class="form-control" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Organs willing to donate:</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="donor-kidney" name="organs[]" value="kidney">
+                                    <label for="donor-kidney">Kidney</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="donor-liver" name="organs[]" value="liver">
+                                    <label for="donor-liver">Liver</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="donor-lung" name="organs[]" value="lung">
+                                    <label for="donor-lung">Lung</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="donor-heart" name="organs[]" value="heart">
+                                    <label for="donor-heart">Heart</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="donor-pancreas" name="organs[]" value="pancreas">
+                                    <label for="donor-pancreas">Pancreas</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="donor-intestines" name="organs[]" value="intestines">
+                                    <label for="donor-intestines">Intestines</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="donor-corneas" name="organs[]" value="corneas">
+                                    <label for="donor-corneas">Corneas</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="donor-tissue" name="organs[]" value="tissue">
+                                    <label for="donor-tissue">Tissue</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="donor-bone-marrow" name="organs[]" value="bone-marrow">
+                                    <label for="donor-bone-marrow">Bone Marrow</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="donor-medical-history">Medical History (Any conditions or illnesses)</label>
+                            <textarea id="donor-medical-history" class="form-control" rows="4"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="donor-medications">Current Medications</label>
+                            <textarea id="donor-medications" class="form-control" rows="2"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="donor-consent" required>
+                            <label for="donor-consent">I consent to becoming an organ donor and allow LifeSync to store and process my information.</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-submit">
+                        <button type="submit" class="btn">Complete Donor Registration</button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Recipient Registration Form -->
+            <div id="recipient-registration" class="tab-content">
+                <form>
+                    <h3>Personal Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="recipient-first-name">First Name</label>
+                            <input type="text" id="recipient-first-name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-last-name">Last Name</label>
+                            <input type="text" id="recipient-last-name" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="recipient-email">Email Address</label>
+                            <input type="email" id="recipient-email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-phone">Phone Number</label>
+                            <input type="tel" id="recipient-phone" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="recipient-dob">Date of Birth</label>
+                            <input type="date" id="recipient-dob" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-gender">Gender</label>
+                            <select id="recipient-gender" class="form-control" required>
+                                <option value="">Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                                <option value="prefer-not-to-say">Prefer not to say</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="recipient-address">Address</label>
+                        <input type="text" id="recipient-address" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="recipient-city">City</label>
+                            <input type="text" id="recipient-city" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-state">State/Province</label>
+                            <input type="text" id="recipient-state" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-zip">Zip/Postal Code</label>
+                            <input type="text" id="recipient-zip" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="medical-section">
+                        <h3>Medical Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="recipient-blood-type">Blood Type</label>
+                                <select id="recipient-blood-type" class="form-control" required>
+                                    <option value="">Select Blood Type</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
